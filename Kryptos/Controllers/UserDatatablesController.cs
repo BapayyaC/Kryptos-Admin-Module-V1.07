@@ -1094,9 +1094,7 @@ namespace Kryptos.Controllers
                                 db.Database.ExecuteSqlCommand(
                                     "delete from KPTY_USER_FORGOT_PASS_OTP_REQ_TBL where UserId = {0}", selecteduser);
                                 db.KPTY_USER_FORGOT_PASS_OTP_REQ_TBL.Add(info);
-                                db.UserRegitrationForInitialLogins.Remove(
-                                    db.UserRegitrationForInitialLogins.SingleOrDefault(u => u.USERID == selecteduser));
-
+                                db.Database.ExecuteSqlCommand("delete from UserRegitrationForInitialLogin where USERID = {0}", selecteduser);
                                 intialLogin.IsInitialLogin = true;
                                 intialLogin.IsTermsAccepted = false;
                                 intialLogin.IsSecQuestEnabled = false;
